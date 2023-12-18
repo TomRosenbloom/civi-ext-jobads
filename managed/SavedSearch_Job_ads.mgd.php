@@ -1,7 +1,5 @@
 <?php
-
 use CRM_Jobads_ExtensionUtil as E;
-
 
 return [
   [

@@ -1,0 +1,9 @@
+<af-form ctrl="afform">
+  <af-entity type="JobAd" name="JobAd1" label="Job Ad 1" actions="{create: true, update: true}" security="RBAC" />
+  <fieldset af-fieldset="JobAd1" class="af-container" af-title="Job Ad 1">
+    <af-field name="job_title" />
+    <af-field name="summary" />
+    <af-field name="description" />
+  </fieldset>
+  <button class="af-button btn btn-primary" crm-icon="fa-check" ng-click="afform.submit()" ng-if="afform.showSubmitButton">Submit</button>
+</af-form>

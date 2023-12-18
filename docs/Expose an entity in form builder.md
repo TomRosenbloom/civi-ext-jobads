@@ -51,3 +51,10 @@ https://docs.civicrm.org/dev/en/latest/afform/afform-core/ - seems to be saying 
 go to FB page in UI, find the form, copy the name e.g. afsearchFooForm and make afsearchFooForm.aff.html and afsearchFooForm.aff.php in ang folder, then populate them with  (1) the html copied and pasted from 'markup' window of FB UI (2) something like https://lab.civicrm.org/extensions/pets/-/blob/master/ang/afsearchPets.aff.php?ref_type=heads
 
 ...this could be working, but we need to add some 'foos' first, so we need to make an 'add' form (foos are not in api4)
+
+Note that whereas in the SK UI there is a tab for your own (custom) SKs and one for packaged, the FB UI doesn't work in an analogous way - you have tabs for submission forms and search forms (and field blocks and system forms), but these are a mixture of ones defined in extensions and ones created locally. That's a bit confusing until you get used to it.
+
+As things stand, foos are not showing as something that can have a submission form, whereas job ads are - so what's the reason for this again... foos are not an API4 entity - they don't appear there either, so at this point I've create an afform for listing foos, and a tab in the contact record, but have no way of creating them. That's kind of logical because I don't have a database table for storing foos. So that begs the question, when would you ever want to create an packaged search without afform entities? If you were using custom data would be one reason I guess...
+
+So in my process chart, I think a key questions is, how do you want to store your new thing - create an entity, or use custom data? What are the pros and cons? Seems to me the only reason to use custom data is you can do it through the UI...
+

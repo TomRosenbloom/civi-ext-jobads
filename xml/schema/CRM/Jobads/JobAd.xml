@@ -25,6 +25,10 @@
     <name>contact_id</name>
     <type>int unsigned</type>
     <comment>FK to Contact</comment>
+    <html>
+      <type>EntityRef</type>
+      <label>Contact</label>
+    </html>
   </field>
   <foreignKey>
     <name>contact_id</name>

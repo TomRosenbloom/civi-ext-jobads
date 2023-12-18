@@ -58,3 +58,4 @@ As things stand, foos are not showing as something that can have a submission fo
 
 So in my process chart, I think a key questions is, how do you want to store your new thing - create an entity, or use custom data? What are the pros and cons? Seems to me the only reason to use custom data is you can do it through the UI...
 
+Tried `civix export Afform formname` for jobads and that works, but why am I not seeing the contact field as an option in the form builder UI, whereas it is in API4? Answer: needed to run `civix generate:entity-boilerplate` 

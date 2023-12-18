@@ -59,3 +59,9 @@ As things stand, foos are not showing as something that can have a submission fo
 So in my process chart, I think a key questions is, how do you want to store your new thing - create an entity, or use custom data? What are the pros and cons? Seems to me the only reason to use custom data is you can do it through the UI...
 
 Tried `civix export Afform formname` for jobads and that works, but why am I not seeing the contact field as an option in the form builder UI, whereas it is in API4? Answer: needed to run `civix generate:entity-boilerplate` 
+
+NB there is a php error in /Civi/APi4/JobAd.php
+
+Now, how do I get an 'add job ad' link to appear in the contact summary tab? And/or how to get an 'add' button to appear in the job ad listing? Come to that, how do I get a listing of jobads to appear in the contact jobads tab? I just cloned and installed 'pets' and I'm not seeing it there...
+
+This should be decided by the Expose To setting in the form builder UI - but that is already set for Pets - Expose To: Contact Summary Tab - but not working...

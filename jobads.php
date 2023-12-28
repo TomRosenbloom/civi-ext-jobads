@@ -40,7 +40,7 @@ function jobads_civicrm_tabset($path, &$tabs, $context) {
   if ($path === 'civicrm/contact/view') {
     // add a tab to the contact summary screen
     $contactId = $context['contact_id'];
-    $url = CRM_Utils_System::url('civicrm/myentity/contacttab', ['cid' => $contactId]);
+    $url = CRM_Utils_System::url('civicrm/jobads/contacttab', ['cid' => $contactId]);
 
     $myEntities = \Civi\Api4\JobAd::get()
       ->selectRowCount()
@@ -48,11 +48,11 @@ function jobads_civicrm_tabset($path, &$tabs, $context) {
       ->execute();
 
     $tabs[] = array(
-      'id' => 'contact_my_entity',
+      'id' => 'contact_jobads',
       'url' => $url,
       'count' => $myEntities->count(),
-      'title' => E::ts('My Entity'),
-      'weight' => 1,
+      'title' => E::ts('Job Ads'),
+      'weight' => 150,
       'icon' => 'crm-i fa-envelope-open',
     );
   }

@@ -67,3 +67,20 @@ Now, how do I get an 'add job ad' link to appear in a contact tab? And/or how to
 This should be decided by the Expose To setting in the form builder UI - ? but that is already set for Pets - Expose To: Contact Summary Tab - but not working...
 
 I think that just adds a tab to the contact summary, but to have something actually in the tab, you have to follow this: https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/#10-add-a-tab-on-contact-summary
+
+...or do you... I went down that road, and by the bye found that I didn't have the table display that form builder relied on in the mgd.php file (and hence the form didn't work when I re-installed the extension), so I rectified that and then found that the tab on contact summary works (but only when that is specificed in 'exposed to' in the FB UI), and *still* works if I comment out everything in the files added by `civix generate:page ContactTab civicrm/myentity/contacttab` 
+
+ok, I had to update this bit of code in /jobads.php:
+
+```php
+    $tabs[] = array(
+      'id' => 'contact_jobads',
+      'url' => $url,
+      'count' => $myEntities->count(),
+      'title' => E::ts('Job Ads'),
+      'weight' => 150,
+      'icon' => 'crm-i fa-envelope-open',
+    );
+```
+
+...i.e. the hook that adds a new tab (or tabs), and now the tab is created by the extension rather than the FB UI. But what of the page and template defined in CRM/Page/ContactTab.php and templates/CRM/Myentity/Page/ContactTab.tpl?

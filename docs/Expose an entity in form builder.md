@@ -68,6 +68,10 @@ This should be decided by the Expose To setting in the form builder UI - ? but t
 
 I think that just adds a tab to the contact summary, but to have something actually in the tab, you have to follow this: https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/#10-add-a-tab-on-contact-summary
 
+```
+
+```
+
 ...or do you... I went down that road, and by the bye found that I didn't have the table display that form builder relied on in the mgd.php file (and hence the form didn't work when I re-installed the extension), so I rectified that and then found that the tab on contact summary works (but only when that is specificed in 'exposed to' in the FB UI), and *still* works if I comment out everything in the files added by `civix generate:page ContactTab civicrm/myentity/contacttab` 
 
 ok, I had to update this bit of code in /jobads.php:
@@ -84,3 +88,29 @@ ok, I had to update this bit of code in /jobads.php:
 ```
 
 ...i.e. the hook that adds a new tab (or tabs), and now the tab is created by the extension rather than the FB UI. But what of the page and template defined in CRM/Page/ContactTab.php and templates/CRM/Myentity/Page/ContactTab.tpl?
+
+We just don't seem to be getting to those pages. I can put any old crap in there and no error is raised. But I do have a working job ads tab in the contact summary... and in the FB UI, the job ad submission and search forms are both shown as coming from the jobads 'package'.
+
+Now here's an interesting thing. The Pets extension adds a tab, but the tab doesn't do what it should - no pets are listed even though I added one for contact. Why is this? Because there's no display in the SK?
+
+[returning to the 'add' question, this is done in Pets by adding to the SK display via toolbar then re-exporting to mgd]
+
+So I add:
+
+```php
+          'toolbar' => [
+            [
+              'path' => 'civicrm/jobad/add',
+              'icon' => 'fa-external-link',
+              'text' => E::ts('Link'),
+              'style' => 'default',
+              'condition' => [],
+              'task' => '',
+              'entity' => '',
+              'action' => '',
+              'join' => '',
+              'target' => '',
+            ],
+```
+
+...to the mgd file, and that adds an 'add' button, but if I add \#?contact_id=[contact_id] to the end of the add link (following the example of Pets), it just doesn't work i.e. the link doesn't appear. How do I add an 'add' button that is for the current contact?

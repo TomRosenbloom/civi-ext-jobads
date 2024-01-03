@@ -104,6 +104,20 @@ return [
             'table',
             'table-striped',
           ],
+          'toolbar' => [
+            [
+              'path' => 'civicrm/jobad/add#?contact_id=[contact_id]',
+              'icon' => 'fa-external-link',
+              'text' => E::ts('Link'),
+              'style' => 'default',
+              'condition' => [],
+              'task' => '',
+              'entity' => '',
+              'action' => '',
+              'join' => '',
+              'target' => '',
+            ],
+          ],          
         ],
       ],
       'match' => [

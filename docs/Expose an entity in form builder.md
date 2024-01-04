@@ -1,5 +1,3 @@
-
-
 ## Expose an entity in form builder
 
 replacement text for https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/#7-add-a-form
@@ -114,3 +112,39 @@ So I add:
 ```
 
 ...to the mgd file, and that adds an 'add' button, but if I add \#?contact_id=[contact_id] to the end of the add link (following the example of Pets), it just doesn't work i.e. the link doesn't appear. How do I add an 'add' button that is for the current contact?
+
+Note, you can change the text and style of the add button (styles from the options as per the SK UI - default, success, etc). How would you change the positon? Would that level of change require an ang page and template? (which is one of the things I haven't got working and nee to ask K about)
+
+
+
+I added Contact to job ad submission form, through UI - but how are forms packaged in extension??
+
+
+
+
+
+
+
+Questions for Kurund:
+
+- why doesn't the 'add' button work when I change the path to civicrm/jobad/add\#?contact_id=[contact_id]
+- how can I change the position of the Add button? [have it rendered in some way other than in a toolbar]
+- generally, how to style displays, or make bespoke displays I guess...
+- why doesn't the adding of a contact summary tab work in the way described in the manual? If I wanted it to work in that way - to have a bespoke template (which is maybe the way to change the position of the add button), how would I do that?
+- how do you make a submission form part of your extension? [it's confusing how SK and FB have a fundamentally different UI approach i.e. the former is Custom/Packaged, the latter is Submission/Search]
+- talk me through how to make fk to options
+- [could be that some of this will only really make sense if I understand how angular works...]
+
+
+
+How far am I off having the needed functionality?
+
+- have a job ads entity
+- have fk links to option groups, for job type for e.g.
+- be able to CRUD job ads on the admin side
+- allow external user to add job ad, 
+- ...and pay online (how would *that* work?)
+- send notifications
+- allow external user to view current/past ads
+- have a publicly available job ad listing
+- 

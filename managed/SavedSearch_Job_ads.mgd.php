@@ -106,10 +106,10 @@ return [
           ],
           'toolbar' => [
             [
-              'path' => 'civicrm/jobad/add#?contact_id=[contact_id]',
+              'path' => 'civicrm/jobad/add',
               'icon' => 'fa-external-link',
-              'text' => E::ts('Link'),
-              'style' => 'default',
+              'text' => E::ts('Add job ad'),
+              'style' => 'success',
               'condition' => [],
               'task' => '',
               'entity' => '',

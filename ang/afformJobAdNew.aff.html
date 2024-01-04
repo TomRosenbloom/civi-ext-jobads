@@ -1,6 +1,7 @@
 <af-form ctrl="afform">
-  <af-entity type="JobAd" name="JobAd1" label="Job Ad 1" actions="{create: true, update: true}" security="RBAC" />
+  <af-entity type="JobAd" name="JobAd1" label="Job Ad 1" actions="{create: true, update: true}" security="RBAC" data="{}" url-autofill="1" />
   <fieldset af-fieldset="JobAd1" class="af-container" af-title="Job Ad 1">
+    <af-field name="contact_id" />
     <af-field name="job_title" />
     <af-field name="summary" />
     <af-field name="description" />

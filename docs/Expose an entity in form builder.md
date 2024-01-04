@@ -48,6 +48,8 @@ https://docs.civicrm.org/dev/en/latest/afform/afform-core/ - seems to be saying 
 
 go to FB page in UI, find the form, copy the name e.g. afsearchFooForm and make afsearchFooForm.aff.html and afsearchFooForm.aff.php in ang folder, then populate them with  (1) the html copied and pasted from 'markup' window of FB UI (2) something like https://lab.civicrm.org/extensions/pets/-/blob/master/ang/afsearchPets.aff.php?ref_type=heads
 
+OR, civix export...
+
 ...this could be working, but we need to add some 'foos' first, so we need to make an 'add' form (foos are not in api4)
 
 Note that whereas in the SK UI there is a tab for your own (custom) SKs and one for packaged, the FB UI doesn't work in an analogous way - you have tabs for submission forms and search forms (and field blocks and system forms), but these are a mixture of ones defined in extensions and ones created locally. That's a bit confusing until you get used to it.

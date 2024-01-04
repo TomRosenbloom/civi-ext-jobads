@@ -139,6 +139,7 @@ Questions for Kurund:
 - what's the request-response cycle in Civi?
 - how to specify the action following submission of new job ad form? and make it context sensitive? - I see an option in the FB UI, but seems limited
 - what's 'existing job ad' in submission form UI?
+- how to preserve existing data when uninstall/installing
 
 
 

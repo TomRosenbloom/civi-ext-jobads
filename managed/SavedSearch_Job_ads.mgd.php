@@ -98,6 +98,24 @@ return [
               'label' => E::ts('Full description'),
               'sortable' => TRUE,
             ],
+            [
+              'links' => [
+                [
+                  'path' => '/wp-admin/admin.php?page=CiviCRM&q=civicrm%2Fjobad%2Fadd#?JobAd1=[id]',
+                  'icon' => 'fa-external-link',
+                  'text' => E::ts('Link'),
+                  'style' => 'success',
+                  'condition' => [],
+                  'task' => '',
+                  'entity' => '',
+                  'action' => '',
+                  'join' => '',
+                  'target' => '',
+                ],
+              ],
+              'type' => 'links',
+              'alignment' => 'text-right',
+            ],            
           ],
           'actions' => TRUE,
           'classes' => [

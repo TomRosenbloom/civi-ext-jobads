@@ -134,6 +134,9 @@ Questions for Kurund:
 - how do you make a submission form part of your extension? [it's confusing how SK and FB have a fundamentally different UI approach i.e. the former is Custom/Packaged, the latter is Submission/Search]
 - talk me through how to make fk to options
 - [could be that some of this will only really make sense if I understand how angular works...]
+- what's the request-response cycle in Civi?
+- how to specify the action following submission of new job ad form? and make it context sensitive? - I see an option in the FB UI, but seems limited
+- what's 'existing job ad' in submission form UI?
 
 
 

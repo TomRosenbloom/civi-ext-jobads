@@ -123,13 +123,16 @@ I added Contact to job ad submission form, through UI - but how are forms packag
 
 
 
-
+Making changes appear - sometime you need to recreate entity boilerplate, sometimes you just need to cv flush - depends on type of change AND ALSO if there are any local changes to SK!
 
 
 
 Questions for Kurund:
 
 - why doesn't the 'add' button work when I change the path to civicrm/jobad/add\#?contact_id=[contact_id]
+
+you add 'add' and 'update' paths to xml schema, then these become available in SK UI
+
 - how can I change the position of the Add button? [have it rendered in some way other than in a toolbar]
 - generally, how to style displays, or make bespoke displays I guess...
 - why doesn't the adding of a contact summary tab work in the way described in the manual? If I wanted it to work in that way - to have a bespoke template (which is maybe the way to change the position of the add button), how would I do that?

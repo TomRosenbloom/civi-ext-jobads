@@ -99,18 +99,25 @@ return [
               'sortable' => TRUE,
             ],
             [
+              'type' => 'field',
+              'key' => 'contract_type:label',
+              'dataType' => 'Integer',
+              'label' => E::ts('Contract type'),
+              'sortable' => TRUE,
+            ],            
+            [
               'links' => [
                 [
                   'path' => '/wp-admin/admin.php?page=CiviCRM&q=civicrm%2Fjobad%2Fadd#?JobAd1=[id]',
                   'icon' => 'fa-external-link',
-                  'text' => E::ts('Link'),
+                  'text' => E::ts('Edit'),
                   'style' => 'success',
                   'condition' => [],
                   'task' => '',
                   'entity' => '',
                   'action' => '',
                   'join' => '',
-                  'target' => '',
+                  'target' => 'crm-popup',
                 ],
               ],
               'type' => 'links',

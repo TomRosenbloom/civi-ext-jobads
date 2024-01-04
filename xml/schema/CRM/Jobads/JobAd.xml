@@ -6,6 +6,10 @@
   <name>civicrm_job_ad</name>
   <comment>FIXME</comment>
   <log>true</log>
+  <paths>
+    <add>civicrm/jobads/add#?contact_id=[contact_id]</add>
+    <update>civicrm/jobads/add</update>
+  </paths>  
 
   <field>
     <name>id</name>

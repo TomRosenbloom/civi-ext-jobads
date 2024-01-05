@@ -134,15 +134,31 @@ Questions for Kurund:
 you add 'add' and 'update' paths to xml schema, then these become available in SK UI
 
 - how can I change the position of the Add button? [have it rendered in some way other than in a toolbar]
+
+this would have to be done via creation of an angular module
+
 - generally, how to style displays, or make bespoke displays I guess...
+
+angular again (https://lab.civicrm.org/ayduns/calendarskdisplay)
+
 - why doesn't the adding of a contact summary tab work in the way described in the manual? If I wanted it to work in that way - to have a bespoke template (which is maybe the way to change the position of the add button), how would I do that?
+
+beacuse SK does all this now
+
 - how do you make a submission form part of your extension? [it's confusing how SK and FB have a fundamentally different UI approach i.e. the former is Custom/Packaged, the latter is Submission/Search]
 - talk me through how to make fk to options
 - [could be that some of this will only really make sense if I understand how angular works...]
 - what's the request-response cycle in Civi?
 - how to specify the action following submission of new job ad form? and make it context sensitive? - I see an option in the FB UI, but seems limited
+
+if you want to make it context sensitive, not available via UI so use afform submit event https://docs.civicrm.org/dev/en/latest/afform/afform-events/#civiafformsubmit
+
 - what's 'existing job ad' in submission form UI?
 - how to preserve existing data when uninstall/installing
+
+https://docs.civicrm.org/dev/en/latest/extensions/civix/#generate-upgrader
+
+
 
 
 

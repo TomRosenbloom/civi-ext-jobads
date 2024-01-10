@@ -6,6 +6,10 @@
   <name>civicrm_job_ad</name>
   <comment>FIXME</comment>
   <log>true</log>
+  <paths>
+    <add>civicrm/jobad/add</add>
+    <update>civicrm/jobad/add#?JobAd1=[id]</update>
+  </paths>  
 
   <field>
     <name>id</name>
@@ -61,7 +65,6 @@
     </html>
   </field>
 
-
   <field>
     <name>description</name>
     <title>Full description</title>
@@ -71,6 +74,22 @@
       <type>RichTextEditor</type>
       <rows>8</rows>
       <cols>60</cols>
+    </html>
+  </field>
+
+  <field>
+    <name>contract_type</name>
+    <title>Contract type</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value, registered contract type</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_contract_type</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Contract type</label>
     </html>
   </field>
 

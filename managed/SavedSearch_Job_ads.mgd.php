@@ -98,6 +98,31 @@ return [
               'label' => E::ts('Full description'),
               'sortable' => TRUE,
             ],
+            [
+              'type' => 'field',
+              'key' => 'contract_type:label',
+              'dataType' => 'Integer',
+              'label' => E::ts('Contract type'),
+              'sortable' => TRUE,
+            ],            
+            [
+              'links' => [
+                [
+                  'entity' => 'JobAd',
+                  'action' => 'update',
+                  'join' => '',
+                  'target' => '_blank',
+                  'icon' => 'fa-pencil',
+                  'text' => E::ts('Update Job Ad'),
+                  'style' => 'default',
+                  'path' => '',
+                  'task' => '',
+                  'condition' => [],
+                ],
+              ],
+              'type' => 'links',
+              'alignment' => 'text-right',
+            ],            
           ],
           'actions' => TRUE,
           'classes' => [

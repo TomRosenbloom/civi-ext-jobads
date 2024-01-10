@@ -1,5 +1,3 @@
-
-
 ## Expose an entity in form builder
 
 replacement text for https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/#7-add-a-form
@@ -49,6 +47,8 @@ question: can you created a packaged/managed search without the afform entities?
 https://docs.civicrm.org/dev/en/latest/afform/afform-core/ - seems to be saying that adding forms to the extension is via ang folder etc.
 
 go to FB page in UI, find the form, copy the name e.g. afsearchFooForm and make afsearchFooForm.aff.html and afsearchFooForm.aff.php in ang folder, then populate them with  (1) the html copied and pasted from 'markup' window of FB UI (2) something like https://lab.civicrm.org/extensions/pets/-/blob/master/ang/afsearchPets.aff.php?ref_type=heads
+
+OR, civix export...
 
 ...this could be working, but we need to add some 'foos' first, so we need to make an 'add' form (foos are not in api4)
 
@@ -123,19 +123,42 @@ I added Contact to job ad submission form, through UI - but how are forms packag
 
 
 
-
+Making changes appear - sometime you need to recreate entity boilerplate, sometimes you just need to cv flush - depends on type of change AND ALSO if there are any local changes to SK!
 
 
 
 Questions for Kurund:
 
 - why doesn't the 'add' button work when I change the path to civicrm/jobad/add\#?contact_id=[contact_id]
+
+you add 'add' and 'update' paths to xml schema, then these become available in SK UI
+
 - how can I change the position of the Add button? [have it rendered in some way other than in a toolbar]
+
+this would have to be done via creation of an angular module
+
 - generally, how to style displays, or make bespoke displays I guess...
+
+angular again (https://lab.civicrm.org/ayduns/calendarskdisplay)
+
 - why doesn't the adding of a contact summary tab work in the way described in the manual? If I wanted it to work in that way - to have a bespoke template (which is maybe the way to change the position of the add button), how would I do that?
+
+beacuse SK does all this now
+
 - how do you make a submission form part of your extension? [it's confusing how SK and FB have a fundamentally different UI approach i.e. the former is Custom/Packaged, the latter is Submission/Search]
 - talk me through how to make fk to options
 - [could be that some of this will only really make sense if I understand how angular works...]
+- what's the request-response cycle in Civi?
+- how to specify the action following submission of new job ad form? and make it context sensitive? - I see an option in the FB UI, but seems limited
+
+if you want to make it context sensitive, not available via UI so use afform submit event https://docs.civicrm.org/dev/en/latest/afform/afform-events/#civiafformsubmit
+
+- what's 'existing job ad' in submission form UI?
+- how to preserve existing data when uninstall/installing
+
+https://docs.civicrm.org/dev/en/latest/extensions/civix/#generate-upgrader
+
+
 
 
 
@@ -150,6 +173,3 @@ How far am I off having the needed functionality?
 - allow external user to view current/past ads
 - have a publicly available job ad listing
 - 
-
-
-

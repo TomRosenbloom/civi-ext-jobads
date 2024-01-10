@@ -39,6 +39,7 @@ CREATE TABLE `civicrm_job_ad` (
   `job_title` varchar(255) NOT NULL COMMENT 'Job title',
   `summary` longtext COMMENT 'Short summary to go in the main listing',
   `description` longtext COMMENT 'Full description',
+  `contract_type` int unsigned NOT NULL DEFAULT 1 COMMENT 'valid value, registered contract type',
   PRIMARY KEY (`id`),
   CONSTRAINT FK_civicrm_job_ad_contact_id FOREIGN KEY (`contact_id`) REFERENCES `civicrm_contact`(`id`) ON DELETE CASCADE
 )

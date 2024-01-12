@@ -131,7 +131,7 @@ return [
           ],
           'toolbar' => [
             [
-              'path' => 'civicrm/jobad/add',
+              'path' => 'civicrm/jobad/add#?contact_id=[contact_id]',
               'icon' => 'fa-external-link',
               'text' => E::ts('Add job ad'),
               'style' => 'success',

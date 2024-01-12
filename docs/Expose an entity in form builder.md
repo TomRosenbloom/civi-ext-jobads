@@ -173,3 +173,13 @@ How far am I off having the needed functionality?
 - allow external user to view current/past ads
 - have a publicly available job ad listing
 - 
+
+
+
+Just noticed that list of job ads under contact tab is all job ads, not just those for current contact... how do I fix this - I have absolutely no fucking clue...
+
+how is the contact summary page constructed? How do other tabs get the correct count of related records?
+
+the answer is here: https://chat.civicrm.org/civicrm/pl/fkkb51mxttfopxe186cokaokzo
+
+so a pattern is emerging - make change in UI, export, make change in UI, export... and so on

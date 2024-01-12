@@ -104,7 +104,7 @@ return [
               'dataType' => 'Integer',
               'label' => E::ts('Contract type'),
               'sortable' => TRUE,
-            ],            
+            ],
             [
               'links' => [
                 [
@@ -122,7 +122,7 @@ return [
               ],
               'type' => 'links',
               'alignment' => 'text-right',
-            ],            
+            ],
           ],
           'actions' => TRUE,
           'classes' => [
@@ -142,7 +142,7 @@ return [
               'join' => '',
               'target' => '',
             ],
-          ],          
+          ],
         ],
       ],
       'match' => [

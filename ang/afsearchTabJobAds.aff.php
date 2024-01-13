@@ -3,7 +3,7 @@ use CRM_Jobads_ExtensionUtil as E;
 
 return [
   'type' => 'search',
-  'title' => E::ts('Job ads for contact'),
+  'title' => E::ts('Job ads'),
   'placement' => [
     'contact_summary_tab',
   ],

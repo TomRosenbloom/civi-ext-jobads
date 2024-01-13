@@ -183,3 +183,11 @@ how is the contact summary page constructed? How do other tabs get the correct c
 the answer is here: https://chat.civicrm.org/civicrm/pl/fkkb51mxttfopxe186cokaokzo
 
 so a pattern is emerging - make change in UI, export, make change in UI, export... and so on
+
+
+
+current issue: got the add/edit to be for tabbed user, and got them in popups, but now have problem with the general search for all jobs - losing path, and losing add button
+
+perhaps I just need two displays, or forms at least, one for contact tab, one showing all, for admin - I mean I will want a separate form, whatever, because it's going to need filters at top
+
+aha! - looking in the UI list of fomrs, forms that are on contact tab never have anything in the 'page' column

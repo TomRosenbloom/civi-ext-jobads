@@ -9,6 +9,7 @@
   <paths>
     <add>civicrm/jobad/add#?contact_id=[contact_id]</add>
     <update>civicrm/jobad/add#?JobAd1=[id]</update>
+    <delete>civicrm/jobad/form?reset=1&amp;action=delete&amp;JobAd1=[id]</delete>
   </paths>  
 
   <field>

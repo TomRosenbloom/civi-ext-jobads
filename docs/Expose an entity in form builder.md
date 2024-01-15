@@ -191,3 +191,27 @@ current issue: got the add/edit to be for tabbed user, and got them in popups, b
 perhaps I just need two displays, or forms at least, one for contact tab, one showing all, for admin - I mean I will want a separate form, whatever, because it's going to need filters at top
 
 aha! - looking in the UI list of fomrs, forms that are on contact tab never have anything in the 'page' column
+
+
+
+Ok, this is all working pretty nicely - have all CRUD except Delete for admin and for contact tab
+
+How to implement delete?
+
+So, to do:
+
+- delete ad
+- restrict to organisations only
+- add more fields
+- public listing
+- public form for submitting new job ad
+- online payment
+
+
+
+A new set of questions for Kurund:
+
+- how to add delete path
+- error reporting - how to do?
+- the above list - profile, contribution page...
+

@@ -52,9 +52,11 @@ OR, civix export...
 
 ...this could be working, but we need to add some 'foos' first, so we need to make an 'add' form (foos are not in api4)
 
-Note that whereas in the SK UI there is a tab for your own (custom) SKs and one for packaged, the FB UI doesn't work in an analogous way - you have tabs for submission forms and search forms (and field blocks and system forms), but these are a mixture of ones defined in extensions and ones created locally. That's a bit confusing until you get used to it.
+[Note that whereas in the SK UI there is a tab for your own (custom) SKs and one for packaged, the FB UI doesn't work in an analogous way - you have tabs for submission forms and search forms (and field blocks and system forms), but these are a mixture of ones defined in extensions and ones created locally. That's a bit confusing until you get used to it.]
 
 As things stand, foos are not showing as something that can have a submission form, whereas job ads are - so what's the reason for this again... foos are not an API4 entity - they don't appear there either, so at this point I've create an afform for listing foos, and a tab in the contact record, but have no way of creating them. That's kind of logical because I don't have a database table for storing foos. So that begs the question, when would you ever want to create an packaged search without afform entities? If you were using custom data would be one reason I guess...
+
+https://docs.civicrm.org/dev/en/latest/afform/form-builder/ - this is how to make an afform entity (or make your entity an afform entity). It's a manual process - add mixin to info.xml, then put php file in afformEntities folder
 
 So in my process chart, I think a key questions is, how do you want to store your new thing - create an entity, or use custom data? What are the pros and cons? Seems to me the only reason to use custom data is you can do it through the UI...
 
@@ -212,6 +214,23 @@ So, to do:
 A new set of questions for Kurund:
 
 - how to add delete path
+
+note the path with 'form' didn't exist...
+
 - error reporting - how to do?
-- the above list - profile, contribution page...
+- how to make a contribution page
+
+use form builder, on submission direct to contribution page - pass in amount via url of contribution page (and job id, to attach the payment to job ad - this might need a new entity to link contribution page to job advert) 
+
+- problem with ECK
+
+
+
+
+
+hide contact in tab add form
+
+
+
+OK so Kurund talked me through creating a delete form and path, whcih was helpful in terms of learning how civi code works, but I just recreated a foo extension, and find I have a working delete link by some kind of magic!? How has this happened?
 

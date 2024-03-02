@@ -135,7 +135,7 @@ If we are creating a new entity, we've just followed the first iteration of a cy
 3) generate upgrader
 4) (re-)install
 
-This cycle will be repeated for any subsequent changes to the entity schema.
+This cycle will be repeated for any subsequent changes to the entity schema. [actually only the first two - just those followed by cv flush will do it]
 
 
 
@@ -154,27 +154,46 @@ We might want to add some navigation links to appear in the Civi interface.
 
 We will also want to ensure that our extension is properly self-contained and portable - all its components and dependencies are defined within the extension.
 
-There's no particular order for doing those things in [?], but there are some basic principles.  
 
-1. create, in UI
-2. export
-3. insert in code
 
-In no particular order then:
+## Define some 'managed entities'
 
-## Define an option group
+Managed Entity is a general concept, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups.
 
-Create an option group via the UI.
+Saved searches and option groups, as examples of managed entities, are created in a very similar way. Note your extension can define option groups but no saved search(es), or a saved search and no option groups. Saved searches and Option Groups are two independent varieties of managed entity.
 
-Export with API UI [in Voscur I have to do this manually because it's an older version, but in latest Civi you can use civix export]
+The basic principle for creating managed entities is:  
 
-- get id or name of option group
-- OptionGroup export id=1234, or name =option_group_name
-- create `managed` folder
-- create suitably named file `managed/my_option_group.mgd.php`
+1. create in UI
+2. export code
+3. insert code in extension
+4. flush caches
+
+
+
+### Defining an option group
+
+1. Create an option group via the UI.
+2. Export with API UI [in Voscur I have to do this manually because it's an older version, but in latest Civi you can use civix export]
+
+   - Support->Developer->Api explorer v4
+   - Entity = OptionGroup, Action = Export
+   - enter id of option group
+   - Execute
+   - View as php
+3. insert into code:
+
+   - create `managed` folder
+- create suitably named file `managed/my_option_group.mgd.php` [the usual convention is to use the name of the exported option group `OptionGroup_my_option_group` but you can call it what you like]
+   - paste exported php code into the file (add opening php tag, and `use CRM_Myextension_ExtensionUtil as E;` at top of file)
 - add `field` tag to xml/schema/CRM/myentity/MyEntity.xml
-- `civix generate:entity-boilerplate`
-- `cv flush`
+4. apply the changes
+
+   - `civix generate:entity-boilerplate`
+
+   - `cv flush`
+
+
 
 Example managed option group file contents:
 
@@ -295,15 +314,49 @@ Example of `field` tag making one-to-many link to option group:
   </field>
 ```
 
-Important note: the value of `optionGroupName` is the value of `'params'=>'values'=>'name'` in the mgd file. So, in the above example, not `OptionGroup_my_option_group`, but `my_option_group`.
+**Important note:** the value of `optionGroupName` is the value of `'params'=>'values'=>'name'` in the mgd file. So, in the above example, not `OptionGroup_my_option_group`, but `my_option_group`.
 
 
 
+### Creating a packaged search
+
+1. Create a Search Kit search via the UI - including displays as required [for job ads I created separate displays for admin and contact tab]
+
+2. Export with API UI [in Voscur I have to do this manually because it's an older version, but in latest Civi you can use civix export]
+
+   - Support->Developer->Api explorer v4
+   - Entity = SavedSearch, Action = Export
+   - enter id of saved search
+   - Execute
+   - View as php
+
+3. insert into code:
+
+   - create `managed` folder, if not already 
+
+   - create suitably named file `managed/my_saved_search.mgd.php` [the usual convention is to use the name of the exported option group `SavedSearch_my_saved_search` but you can call it what you like - *check this* - definitely true for option groups but saved searches?]
+
+   - paste exported php code into the file (add opening php tag, and `use CRM_Myextension_ExtensionUtil as E;` at top of file)
+
+4. apply the changes
+
+   - `civix generate:entity-boilerplate`
+
+   - `cv flush`
 
 
-## Create a packaged search
+
+### Checking our work
+
+Did it work? This is where we need to understand the relationship between what is defined via the UI and what is defined by managed entities in our extension.
+
+Before we added our saved search and/or option groups to the extension, we could see them in the UI, where we initially created them. At this stage - when they have been defined in the UI but not in the extension - searches and option groups are saved in the CiviCRM database only.
+
+Now we have defined them in our extension, this should mean that the option groups and search(es) we see in the UI are being added from the extension. 
 
 
+
+## Create a search form
 
 ## Create a submission form
 

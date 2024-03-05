@@ -162,7 +162,7 @@ Managed Entity is a general concept, but in the scope of this document there are
 
 Saved searches and option groups, as examples of managed entities, are created in a very similar way. Note your extension can define option groups but no saved search(es), or a saved search and no option groups. Saved searches and Option Groups are two independent varieties of managed entity.
 
-The basic principle for creating managed entities is:  
+The basic workflow for creating managed entities is:  
 
 1. create in UI
 2. export code
@@ -346,23 +346,101 @@ Example of `field` tag making one-to-many link to option group:
 
 
 
+### Create a navigation link
+
+1. create a navigation link via the UI `Administer->Customise Data and Screens->Navigation Menu`
+
+2. Export with API UI
+
+   - Support->Developer->Api explorer v4
+
+   - Entity = Navigation, Action = Export
+
+   - enter id of navigation link [not easy to do via the UI - I could only do it by inspecting the html. Can also be found in table `civicrm_navigation`]
+
+   - Execute
+
+   - View as php
+
+3. insert into code:
+
+   - create `managed` folder, if not already 
+
+   - create suitably named file `managed/my_navigation.mgd.php` 
+
+   - paste exported php code into the file (add opening php tag, and `use CRM_Myextension_ExtensionUtil as E;` at top of file)
+
+4. apply the changes
+
+   - `civix generate:entity-boilerplate`
+
+   - `cv flush`
+
+
+
 ### Checking our work
 
 Did it work? This is where we need to understand the relationship between what is defined via the UI and what is defined by managed entities in our extension.
 
 Before we added our saved search and/or option groups to the extension, we could see them in the UI, where we initially created them. At this stage - when they have been defined in the UI but not in the extension - searches and option groups are saved in the CiviCRM database only.
 
-Now we have defined them in our extension, this should mean that the option groups and search(es) we see in the UI are being added from the extension. 
+Now we have defined them in our extension, this should mean that the option groups and search(es) we see in the UI are being added from the extension.  
+
+For a packaged search, we can verify this in the UI. In the SearchKit home page, our search has moved from 'Custom Searches' tab to 'Packaged Search', with the 'Package' shown as 'My Entity Name' (from info.xml).
+
+In the database the search has been added to `civicrm_saved_search`
+
+For an option group, hmm... there's nothing in the UI that shows the origin of option groups. That's because (I reckon) the listing of option groups is built from the table `civicrm_option_group`, which is an older table that predates SK etc. [is there a reason this hasn't been tackled in AdminUI?] However there is a table `civicrm_managed` which keeps track of all managed entities. That's where we can see all our managed entity components: option groups, option values, saved searches, and others [distinct values: CustomField, CustomGroup, CustomSearch, Job, Navigation, OptionGroup, OptionValue, PaymentProcessorType, RelationshipType, ReportTemplate, SavedSearch, SearchDisplay]
+
+...in all cases the nuclear option is to delete from UI then regenerating boilerplate...
 
 
 
-## Create a search form
+## Create a user interface (with Form Builder)
 
-## Create a submission form
+We want to be able to CRUD our entity objects. We can do it via the API UI, but that's very techie. We *could* do it with a SearchKit display, but that would only get us so far. For a self-contained/release-able extension we'll need something more usable for non-technical users - an admin interface in the backend, and perhaps something public-facing.
 
-## Create a navigation link
+For this we need to create some forms in Form Builder. As with managed entities, to add FB forms to an extension, there's a similar workflow of creating via the UI then exporting to code.
+
+Following the standard master/detail CRUD pattern, i.e. a listing of our entity objects, with a means to create a new one, and read, update or delete existing ones.
+
+Something that's a bit confusing here - CRUD links don't get created automatically but have to be added to the schema. See: https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/#8-integration-with-search-kit
+
+...but some do seem to arrive automatically sometimes - I've noticed some inconsistency e.g. whether or not a delete path is created, and I don't really understand why... probably to do with Civi version - did I use civix?
+
+https://modeler.cloud.camunda.io/diagrams/f769e7b8-af24-4892-8e53-07eb99591eb7--extension-v2?v=921,392,1
+
+### Create a master list with a FB search form
+
+Before getting into CRUD functionality, let's just say we want a searchable/filterable master listing. How do we do that?
+
+The workflow:
+
+1. create a *search* in SearchKit
+2. create a SK *[display](https://docs.civicrm.org/dev/en/latest/searchkit/displays/)* from the search
+3. create a FB *form* from the display
+4. export to code
+   - expose to afform https://docs.civicrm.org/dev/en/latest/afform/form-builder/#via-declaration-file
+     - add mixin to info.xml
+     - create `afformEntities` folder and file MyEntity.php 
+     - [now the entity type will appear in some new places in UI e.g. in the New Submission Form drop down]
+   - export the form https://docs.civicrm.org/dev/en/latest/afform/afform-core/
+     - create `ang` folder
+     - [...this looks a bit nightmarish...]
+     - [...ah no not quite as bad as I thought, because you can copy paste the markup for the form from the FB UI... that's the aff.html file]
+     - [...but then the json/php file is another matter... in the documentation it's a json file, but looks like the current best practice is to use a php file - that's what civix makes anyway...]
+
+a great deal of this workflow is now replaced with civix export in newer Civi versions, but still worth knowing - because it's worth knowing what civix export is doing, and why...
 
 
 
 
+
+### 'Create' via a submission form
+
+### 'Read'
+
+### 'Update'
+
+### 'Delete'
 

@@ -143,19 +143,25 @@ We run `cv en myentity`. This won't produce any changes in code, but it will (1)
 
 
 
+## Updating the entity
+
+At this point it's likely you might want to make some additions or changes to the structure of your entity.
 
 If we are creating a new entity, we've just followed the first iteration of a cycle:
 
 1) update entity schema 
-2) generate boilerplate 
-3) generate upgrader
+2) generate boilerplate (and upgrader)
 4) (re-)install the extension
 
 This cycle will be repeated for any subsequent changes to the entity schema. [actually only the first two - just those followed by cv flush will do it]
 
 
 
-What next? Whilst we can now perform CRUD actions through the API UI, that's not very user-friendly - only really suitable for advanced CiviCRM users. What we want now is to build into our extension some bespoke CRUD components suitable for non-technical users:
+## What next?
+
+Beyond this point we might follow a few different paths, depending on the functionality that we need in our extension. 
+
+Whilst we can now perform CRUD actions through the API UI, that's not very user-friendly - only really suitable for advanced CiviCRM users. What we want now is to build into our extension some bespoke CRUD components suitable for non-technical users:
 
 - searches and displays to view our entity data
 - forms to create and update entity data

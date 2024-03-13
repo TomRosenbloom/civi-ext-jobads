@@ -145,15 +145,19 @@ We run `cv en myentity`. This won't produce any changes in code, but it will (1)
 
 ## Updating the entity
 
-At this point it's likely you might want to make some additions or changes to the structure of your entity.
+At this point it's likely you might want to make some changes or additions to the structure of your entity. 
 
-If we are creating a new entity, we've just followed the first iteration of a cycle:
+To do that, just repeat the steps outlined above. What we've done in *creating* the entity is follow the first iteration of a cycle, which is repeated for any future changes:
 
 1) update entity schema 
-2) generate boilerplate (and upgrader)
+2) generate boilerplate 
+3) [generate upgrader - this is only done once, when the entity is first created]
 4) (re-)install the extension
+5) flush caches with `cv flush`
 
-This cycle will be repeated for any subsequent changes to the entity schema. [actually only the first two - just those followed by cv flush will do it]
+This cycle will be repeated for any subsequent changes to the entity schema.
+
+Note that you need to re-install the extension to apply changes to the entity that require an sql update. For most other extension changes it is only necessary to flush the caches. More on this below.
 
 
 
@@ -161,10 +165,13 @@ This cycle will be repeated for any subsequent changes to the entity schema. [ac
 
 Beyond this point we might follow a few different paths, depending on the functionality that we need in our extension. 
 
-Whilst we can now perform CRUD actions through the API UI, that's not very user-friendly - only really suitable for advanced CiviCRM users. What we want now is to build into our extension some bespoke CRUD components suitable for non-technical users:
+If we've created an entity, then we are going to need some variety of CRUD interface - possibly more than one if we are catering to different audiences i.e. back-end admin vs public facing.
+
+As noted above we can already perform CRUD actions through the API UI, but that's not very user-friendly, and only really suitable for advanced CiviCRM users. What we want now is to build into our extension some bespoke CRUD components suitable for non-technical users:
 
 - searches and displays to view our entity data
 - forms to create and update entity data
+- safe ways to delete data
 
 We might want different versions of these components for different users and different contexts:
 
@@ -174,15 +181,19 @@ We might want different versions of these components for different users and dif
 
 We might want to add some navigation links to appear in the Civi interface.
 
-We will also want to ensure that our extension is properly self-contained and portable - all its components and dependencies are defined within the extension.
+We will also want to ensure that our extension is properly self-contained and portable - with all its components and dependencies defined within the extension.
+
+
+
+Broadly speaking, we'll use *Managed Entities* to create the basic underpinnings, and *Form Builder* to create a user-interaction layer. 
 
 
 
 ## Define some 'managed entities'
 
-Managed Entity is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups.
+The *Managed Entity* is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups. [...and navigation]
 
-Saved searches and option groups, as examples of managed entities, are created in a very similar way. Note your extension can define option groups but no saved search(es), or a saved search and no option groups. Saved searches and Option Groups are two independent varieties of managed entity.
+Saved searches and option groups, as examples of managed entities, are both created in a similar way. Note Saved searches and Option Groups are two *independent* varieties of managed entity. Your extension can define option groups but no saved search(es), or a saved search and no option groups. 
 
 The basic workflow for creating managed entities is:  
 
@@ -195,20 +206,27 @@ The basic workflow for creating managed entities is:
 
 ### Defining an option group
 
+If we want our entity to have any one-to-many data relationships, the standard mechanism is to use an Option Group. 
+
+Option Groups are defined via two tables in the core CiviCRM database: civicrm_option_group and civicrm_option_value. In your new entity you might refer to an existing option group, or you might want to define your own via the CiviCRM interface (under Administer->System Settings) and incorporate that option group definition into your extension as a manged entity.
+
+These are the steps:
+
 1. Create an option group via the UI.
-2. Export with API UI [in Voscur I have to do this manually because it's an older version, but in latest Civi you can use civix export]
+2. Export with API UI [in latest versions of CiviCRM you can replace these steps with civix export]
 
    - Support->Developer->Api explorer v4
    - Entity = OptionGroup, Action = Export
    - enter id of option group
    - Execute
-   - View as php
+   - View as php and copy to clipboard
 3. insert into code:
 
    - create `managed` folder
-- create suitably named file `managed/my_option_group.mgd.php` [the usual convention is to use the name of the exported option group `OptionGroup_my_option_group` but you can call it what you like]
+   
+   - create suitably named file `managed/my_option_group.mgd.php` [the usual convention is to use the name of the exported option group `OptionGroup_my_option_group` but you can call it what you like]
    - paste exported php code into the file (add opening php tag, and `use CRM_Myextension_ExtensionUtil as E;` at top of file)
-- add `field` tag to xml/schema/CRM/myentity/MyEntity.xml
+   - add `field` tag to xml/schema/CRM/myentity/MyEntity.xml
 4. apply the changes
 
    - `civix generate:entity-boilerplate`
@@ -342,9 +360,11 @@ Example of `field` tag making one-to-many link to option group:
 
 ### Creating a packaged search
 
-1. Create a Search Kit search via the UI - including displays as required [for job ads I created separate displays for admin and contact tab]
+You probably want to offer a master list of your entity items, from which to select items to Read, Update or Delete.
 
-2. Export with API UI [in Voscur I have to do this manually because it's an older version, but in latest Civi you can use civix export]
+1. Create a Search Kit search via the UI - including displays as required 
+
+2. Export with API UI [in latest versions of CiviCRM you can replace these steps with civix export]
 
    - Support->Developer->Api explorer v4
    - Entity = SavedSearch, Action = Export
@@ -354,9 +374,9 @@ Example of `field` tag making one-to-many link to option group:
 
 3. insert into code:
 
-   - create `managed` folder, if not already 
+   - create `managed` folder, if you haven't already 
 
-   - create suitably named file `managed/my_saved_search.mgd.php` [the usual convention is to use the name of the exported option group `SavedSearch_my_saved_search` but you can call it what you like - *check this* - definitely true for option groups but saved searches?]
+   - create suitably named file `managed/my_saved_search.mgd.php` - the usual convention is to use the name of the exported search e.g. `SavedSearch_my_saved_search` but you can call it what you like [*check this* - definitely true for option groups but saved searches?]
 
    - paste exported php code into the file (add opening php tag, and `use CRM_Myextension_ExtensionUtil as E;` at top of file)
 
@@ -400,11 +420,13 @@ Example of `field` tag making one-to-many link to option group:
 
 
 
-### Checking our work
+### Checking your work
 
-Did it work? This is where we need to understand the relationship between what is defined via the UI and what is defined by managed entities in our extension.
+Did it work? 
 
-Before we added our saved search and/or option groups to the extension, we could see them in the UI, where we initially created them. At this stage - when they have been defined in the UI but not in the extension - searches and option groups are saved in the CiviCRM database only.
+This is where we need to understand the relationship between what is defined via the UI and what is defined by managed entities in our extension.
+
+Before we added our saved search and/or option groups to the extension, we could see them in the UI, where we initially created them. At that stage - when they have been defined in the UI but not in the extension - searches and option groups exist in the CiviCRM database only.
 
 Now we have defined them in our extension, this should mean that the option groups and search(es) we see in the UI are being added from the extension.  
 
@@ -424,7 +446,7 @@ For an option group, hmm... there's nothing in the UI that shows the origin of o
 
 We want to be able to CRUD our entity objects. We can do it via the API UI, but that's very techie. We *could* do it with a SearchKit display, but that would only get us so far. For a self-contained/release-able extension we'll need something more usable for non-technical users - an admin interface in the backend, and perhaps something public-facing.
 
-For this we need to create some forms in Form Builder. As with managed entities, to add FB forms to an extension, there's a similar workflow of creating via the UI then exporting to code.
+For this we need to create some forms in Form Builder. As with managed entities, adding FB forms to an extension has a similar workflow of creating via the UI then exporting to code.
 
 Following the standard master/detail CRUD pattern, i.e. a listing of our entity objects, with a means to create a new one, and read, update or delete existing ones.
 
@@ -488,11 +510,9 @@ Next let's add a form for creating entity objects...
 1. create a submission form
 2. export to code
 
-Problem: there is no 'contact' field in the FB UI. This is ringing a bell... a version issue? Had a look on mattermost to see if I asked there but not found when searching for my messages with 'contact'... The bell this is ringing is something else I think - to do with Custom Value Id of custom data https://chat.civicrm.org/civicrm/pl/owhsxz8c9pnrffo5zahcp6ceso
 
-[Maybe it's time to stop doing this in the Voscur site? This versioning issue is getting too much hassle... I can copy paste some of what I've done from one to the other...]
 
-But... in my buildkit site, where I 'foo' extension, that extension has same issue - in the schema and in API foos have a fk relationship to contact, but contact not available when creating a submission form. Ah it's because you need this in the field definition in the schema:
+Tip: you need this in the schema:
 
 ```php
     <html>

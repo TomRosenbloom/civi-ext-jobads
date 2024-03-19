@@ -18,7 +18,10 @@ return [
           'access CiviCRM',
         ],
         'permission_operator' => 'AND',
-        'weight' => 1,
+        'parent_id' => NULL,
+        'is_active' => TRUE,
+        'has_separator' => 0,        
+        'weight' => 999,
       ],
       'match' => [
         'name',
@@ -27,3 +30,5 @@ return [
     ],
   ],
 ];
+
+

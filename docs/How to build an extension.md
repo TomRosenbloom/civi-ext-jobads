@@ -193,7 +193,7 @@ Broadly speaking, we'll use *Managed Entities* to create the basic underpinnings
 
 ## Define some 'managed entities'
 
-The *Managed Entity* is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups. [...and navigation]
+The *[Managed Entity](https://docs.civicrm.org/dev/en/latest/api/v4/managed/)* is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups. [...and navigation]
 
 Saved searches and option groups, as examples of managed entities, are both created in a similar way. Note Saved searches and Option Groups are two *independent* varieties of managed entity. Your extension can define option groups but no saved search(es), or a saved search and no option groups. 
 
@@ -420,7 +420,7 @@ You probably want to offer a master list of your entity items, from which to sel
 
    - `cv flush`
 
-
+[this doesn't work in my buildkit install... can't see any earthly reason why... a bug? how do I upgrade to latest version? Also doesn't work in latest, 5.73.alpha1... in the local install of current live voscur site, if I change the value of 'params'=>['weight'] and then flush caches, the position of the nav item will change. In later version it doesn't]
 
 ### Checking your work
 
@@ -532,3 +532,19 @@ Tip: you need this in the schema:
 ### 'Delete'
 
 ## Add contact summary tab
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hey @aydun just wanted to share something/get your opinion. I've been working on what is basically a replacement for https://docs.civicrm.org/dev/en/latest/step-by-step/create-entity/ and I'm wondering if it is likely to be of any value generally, beyond it's current purpose as my own notes. It's essentially doing the same job as your notes that you shared with me at the Manchester sprint, but fleshed out more. NB I'm not asking you to wade through the whole thing and review it, I'm more interested in whether you think it's worth sharing more widely based on the general approach, structure, language etc. What I'm aiming for is a really comprehensive and user-friendly introduction to extension development - perhaps what I would have liked to have had myself. I realise it's already out of date in a sense because of ECK, but I figure it's always beneficial to know what's going on under the hood. Note also it's WIP and you'll find some 'notes to self' (in square brackets) and some incomplete sections near the end. Anyway, if you have time, give it a glance and let me know. I just don't quite have the nerve to launch it more widely without some prior feedback. Attached...

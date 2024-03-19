@@ -43,6 +43,18 @@
   </foreignKey>
 
   <field>
+    <name>organisation_name</name>
+    <type>varchar</type>
+    <required>true</required>
+    <title>Organisation name for the role</title>
+    <length>255</length>
+    <comment>Name of organisation for the role - could be different from organisation posting the role</comment>
+    <html>
+      <type>Text</type>
+    </html>
+  </field>
+
+  <field>
     <name>job_title</name>
     <type>varchar</type>
     <required>true</required>
@@ -51,18 +63,6 @@
     <comment>Job title</comment>
     <html>
       <type>Text</type>
-    </html>
-  </field>
-
-  <field>
-    <name>summary</name>
-    <title>Summary</title>
-    <type>longtext</type>
-    <comment>Short summary to go in the main listing</comment>
-    <html>
-      <type>RichTextEditor</type>
-      <rows>8</rows>
-      <cols>60</cols>
     </html>
   </field>
 
@@ -77,6 +77,57 @@
       <cols>60</cols>
     </html>
   </field>
+
+  <field>
+    <name>application_deadline</name>
+    <type>datetime</type>
+    <required>true</required>
+    <title>Application deadline</title>
+    <comment></comment>
+    <html>
+      <type>Select Date</type>
+    </html>
+  </field>
+
+  <field>
+    <name>website</name>
+    <title>Website for applying for job</title>
+    <type>longtext</type>
+    <comment></comment>
+    <html>
+      <type>Text</type>
+    </html>
+  </field>  
+
+  <field>
+    <name>fixed_salary</name>
+    <title>Fixed salary (&#163;)</title>
+    <type>decimal</type>
+    <comment>Fixed salary</comment>
+    <html>
+      <type>Text</type>
+    </html>
+  </field>  
+
+  <field>
+    <name>salary_from</name>
+    <title>Salary from</title>
+    <type>decimal</type>
+    <comment>Salary from (&#163;)</comment>
+    <html>
+      <type>Text</type>
+    </html>
+  </field>  
+
+  <field>
+    <name>salary_to</name>
+    <title>Salary to</title>
+    <type>decimal</type>
+    <comment>Salary to (&#163;)</comment>
+    <html>
+      <type>Text</type>
+    </html>
+  </field>  
 
   <field>
     <name>contract_type</name>
@@ -95,4 +146,84 @@
   </field>
 
 
+  <field>
+    <name>full_or_part_time</name>
+    <title>Full or part time</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value from Full or Part time option group</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_full_or_part_time</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Full or part time</label>
+    </html>
+  </field>  
+
+  <field>
+    <name>salary_rate</name>
+    <title>Salary rate</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value from Salary Rate option group</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_salary_rate</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Salary rate</label>
+    </html>
+  </field>  
+
+  <field>
+    <name>salary_scale</name>
+    <title>Salary scale</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value from Salary Scale option group</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_salary_scale</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Salary scale</label>
+    </html>
+  </field>  
+
+  <field>
+    <name>salary_type</name>
+    <title>Salary type</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value from Salary Type option group</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_salary_type</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Salary type</label>
+    </html>
+  </field>  
+
+  <field>
+    <name>role_description</name>
+    <title>Role description</title>
+    <type>int unsigned</type>
+    <required>true</required>
+    <default>1</default>
+    <comment>valid value from Role description option group</comment>
+    <pseudoconstant>
+      <optionGroupName>job_ads_role_description</optionGroupName>
+    </pseudoconstant>
+    <html>
+      <type>Select</type>
+      <label>Role description</label>
+    </html>
+  </field>  
+  
 </table>

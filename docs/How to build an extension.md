@@ -193,7 +193,7 @@ Broadly speaking, we'll use *Managed Entities* to create the basic underpinnings
 
 ## Define some 'managed entities'
 
-The *[Managed Entity](https://docs.civicrm.org/dev/en/latest/api/v4/managed/)* is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups. [...and navigation]
+*[Managed Entity](https://docs.civicrm.org/dev/en/latest/api/v4/managed/)* is a general concept in CiviCRM, but in the scope of this document there are two particular sorts of managed entity that will interest us. These are, in no particular order, saved searches, and option groups. [...and navigation]
 
 Saved searches and option groups, as examples of managed entities, are both created in a similar way. Note Saved searches and Option Groups are two *independent* varieties of managed entity. Your extension can define option groups but no saved search(es), or a saved search and no option groups. 
 

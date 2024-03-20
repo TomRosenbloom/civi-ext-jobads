@@ -2,7 +2,6 @@
 
 use CRM_Jobads_ExtensionUtil as E;
 
-
 return [
     [
       'name' => 'OptionGroup_job_ads_contract_type',
@@ -16,6 +15,7 @@ return [
           'title' => E::ts('Job ads: contract type'),
           'data_type' => 'String',
           'is_reserved' => FALSE,
+          'is_active' => TRUE,
           'option_value_fields' => [
             'name',
             'label',

@@ -1,4 +1,5 @@
 <?php
+
 use CRM_Jobads_ExtensionUtil as E;
 
 return [
@@ -17,10 +18,12 @@ return [
           'version' => 4,
           'select' => [
             'id',
-            'JobAd_Contact_contact_id_01.sort_name',
+            'contact_id.display_name',
             'job_title',
-            'summary',
             'description',
+            'application_deadline',
+            'role_description:label',
+            'contract_type:label',
           ],
           'orderBy' => [],
           'where' => [],
@@ -72,10 +75,18 @@ return [
             ],
             [
               'type' => 'field',
-              'key' => 'JobAd_Contact_contact_id_01.sort_name',
+              'key' => 'contact_id.display_name',
               'dataType' => 'String',
-              'label' => E::ts('Job Ad Contact: Sort Name'),
+              'label' => E::ts('Organisation'),
               'sortable' => TRUE,
+              'link' => [
+                'path' => '',
+                'entity' => 'Contact',
+                'action' => 'view',
+                'join' => 'contact_id',
+                'target' => '_blank',
+              ],
+              'title' => E::ts('View Contact'),
             ],
             [
               'type' => 'field',
@@ -85,17 +96,32 @@ return [
               'sortable' => TRUE,
             ],
             [
-              'type' => 'html',
-              'key' => 'summary',
-              'dataType' => 'Text',
-              'label' => E::ts('Summary'),
+              'type' => 'field',
+              'key' => 'application_deadline',
+              'dataType' => 'Timestamp',
+              'label' => E::ts('Application deadline'),
               'sortable' => TRUE,
             ],
             [
               'type' => 'html',
               'key' => 'description',
               'dataType' => 'Text',
-              'label' => E::ts('Full description'),
+              'label' => E::ts('Job description'),
+              'sortable' => TRUE,
+              'rewrite' => "{'[description]'|truncate:20}",
+            ],
+            [
+              'type' => 'field',
+              'key' => 'role_description:label',
+              'dataType' => 'Integer',
+              'label' => E::ts('Role description'),
+              'sortable' => TRUE,
+            ],
+            [
+              'type' => 'field',
+              'key' => 'contract_type:label',
+              'dataType' => 'Integer',
+              'label' => E::ts('Contract type'),
               'sortable' => TRUE,
             ],
             [
@@ -184,23 +210,9 @@ return [
             ],
             [
               'type' => 'field',
-              'key' => 'JobAd_Contact_contact_id_01.sort_name',
-              'dataType' => 'String',
-              'label' => E::ts('Job Ad Contact: Sort Name'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'field',
               'key' => 'job_title',
               'dataType' => 'String',
               'label' => E::ts('Job title'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'html',
-              'key' => 'summary',
-              'dataType' => 'Text',
-              'label' => E::ts('Summary'),
               'sortable' => TRUE,
             ],
             [
@@ -237,106 +249,6 @@ return [
           'toolbar' => [
             [
               'path' => 'civicrm/jobad/add#?contact_id=[contact_id]',
-              'icon' => 'fa-external-link',
-              'text' => E::ts('Add job ad'),
-              'style' => 'success',
-              'condition' => [],
-              'task' => '',
-              'entity' => '',
-              'action' => '',
-              'join' => '',
-              'target' => 'crm-popup',
-            ],
-          ],
-        ],
-      ],
-      'match' => [
-        'saved_search_id',
-        'name',
-      ],
-    ],
-  ],
-  [
-    'name' => 'SavedSearch_Job_ads_SearchDisplay_Job_ads_Table_1',
-    'entity' => 'SearchDisplay',
-    'cleanup' => 'always',
-    'update' => 'unmodified',
-    'params' => [
-      'version' => 4,
-      'values' => [
-        'name' => 'Job_ads_Table_1',
-        'label' => E::ts('Job ads Table 1'),
-        'saved_search_id.name' => 'Job_ads',
-        'type' => 'table',
-        'settings' => [
-          'description' => NULL,
-          'sort' => [],
-          'limit' => 50,
-          'pager' => [],
-          'placeholder' => 5,
-          'columns' => [
-            [
-              'type' => 'field',
-              'key' => 'id',
-              'dataType' => 'Integer',
-              'label' => E::ts('ID'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'field',
-              'key' => 'JobAd_Contact_contact_id_01.sort_name',
-              'dataType' => 'String',
-              'label' => E::ts('Job Ad Contact: Sort Name'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'field',
-              'key' => 'job_title',
-              'dataType' => 'String',
-              'label' => E::ts('Job title'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'html',
-              'key' => 'summary',
-              'dataType' => 'Text',
-              'label' => E::ts('Summary'),
-              'sortable' => TRUE,
-            ],
-            [
-              'type' => 'html',
-              'key' => 'description',
-              'dataType' => 'Text',
-              'label' => E::ts('Full description'),
-              'sortable' => TRUE,
-            ],
-            [
-              'links' => [
-                [
-                  'entity' => 'JobAd',
-                  'action' => 'update',
-                  'join' => '',
-                  'target' => 'crm-popup',
-                  'icon' => 'fa-pencil',
-                  'text' => E::ts('Update Job Ad'),
-                  'style' => 'default',
-                  'path' => '',
-                  'task' => '',
-                  'condition' => [],
-                ],
-              ],
-              'type' => 'links',
-              'alignment' => 'text-right',
-            ],
-          ],
-          'actions' => TRUE,
-          'classes' => [
-            'table',
-            'table-striped',
-          ],
-          'toolbar' => [
-            [
-              'path' => 'civicrm/jobad/add',
               'icon' => 'fa-external-link',
               'text' => E::ts('Add job ad'),
               'style' => 'success',
